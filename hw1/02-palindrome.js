@@ -6,13 +6,13 @@ elem.addEventListener('input', handleInput);
 
 function handleInput(input) {
   inputString = input.target.value;
+  logNegative.textContent = null;
+  logPositive.textContent = null;
   if (inputString.length > 0) {
     if (isPalindrome(inputString)) {
-      logPositive.textContent = 'Yes. This is a Palindrome';
-      logNegative.textContent = null;
+      logPositive.textContent = 'Yes. This is a Palindrome!';
     } else {
-      logNegative.textContent = 'No. Try Again.';
-      logPositive.textContent = null;
+      logNegative.textContent = 'No. Try again.';
     }
   }
 }
