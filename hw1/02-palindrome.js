@@ -1,11 +1,18 @@
 const elem = document.querySelector('input');
-let logNegative = document.getElementById('notPalindrome');
-let logPositive = document.getElementById('isPalindrome');
+const logNegative = document.getElementById('notPalindrome');
+const logPositive = document.getElementById('isPalindrome');
 
-elem.addEventListener('input', handleInput);
+const isPalindrome = function isPalindromeCheck(inputString) {
+  for (let i = 0; i < inputString.length / 2; i += 1) {
+    if (inputString[i] !== inputString[inputString.length - 1 - i]) {
+      return false;
+    }
+  }
+  return true;
+};
 
-function handleInput(input) {
-  inputString = input.target.value;
+const handleInput = function handleInputForPalindrome(input) {
+  const inputString = input.target.value;
   logNegative.textContent = null;
   logPositive.textContent = null;
   if (inputString.length > 0) {
@@ -15,13 +22,6 @@ function handleInput(input) {
       logNegative.textContent = 'No. Try again.';
     }
   }
-}
+};
 
-function isPalindrome(inputString) {
-  for (let i = 0; i < inputString.length / 2; i++) {
-    if (inputString[i] !== inputString[inputString.length - 1 - i]) {
-      return false;
-    }
-  }
-  return true;
-}
+elem.addEventListener('input', handleInput);
