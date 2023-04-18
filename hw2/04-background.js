@@ -1,6 +1,5 @@
-const interval = document.getElementById('number').value;
-const submit = document.getElementById('submit');
-// const background = document.getElementById('background');
+const button = document.getElementById('button');
+let intervalStatus = 0;
 // Add your code here
 
 // https://stackoverflow.com/questions/1484506/random-color-generator
@@ -18,7 +17,15 @@ const changeColor = function changeBackgroundColorEveryInterval() {
   document.body.style.background = randomColor();
 };
 
-submit.addEventListener('click', () => {
-  console.log(interval);
-  setInterval(changeColor, Number(interval * 1000));
+button.addEventListener('click', () => {
+  const interval = document.getElementById('number').value;
+  if (button.value === 'Start') {
+    intervalStatus = setInterval(changeColor, Number(interval * 1000));
+    button.value = 'Stop';
+    button.className = 'btn btn-danger my-3 mx-3';
+  } else {
+    clearInterval(intervalStatus);
+    button.value = 'Start';
+    button.className = 'btn btn-primary my-3 mx-3';
+  }
 });
