@@ -10,7 +10,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // iterate through the array and create a card for each object
   data.forEach((character) => {
-    // create a Bootstrap card element
+    const col = document.createElement('col')
+
+        // create a Bootstrap card element
     const card = document.createElement('div');
     card.classList.add('card');
     card.style.width = '200px';
@@ -44,6 +46,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     card.appendChild(cardBody);
 
     // append the card to the container
+    container.appendChild(col)
     container.appendChild(card);
   });
 });
