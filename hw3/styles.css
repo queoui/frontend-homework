@@ -18,17 +18,12 @@ h1 {
   background-color: var(--white);
 }
 
-col {
-  display: block;
-  position: absolute;
-  width: 100px;
-}
 img {
-  display: block;
+  /* display: block; */
   margin-left: auto;
   margin-right: auto;
-  width: 225px;
-  height: 225px;
+  width: 200px;
+  height: 200px;
 }
 
 .row {
@@ -37,14 +32,17 @@ img {
   width: '225px';
   height: '20rem';
 }
-
 .card {
-  display: block;
-  width: 225px;
-  height: 350px;
   background-color: var(--cyan);
   border-color: var(--cyan);
+  font-weight: bold;
 }
+
+.card:hover {
+  background-color: var(--blue);
+  color: white;
+}
+
 h5 {
-  font-weight: 'bold';
+  font-weight: 700;
 }

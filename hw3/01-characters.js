@@ -12,14 +12,13 @@ document.addEventListener('DOMContentLoaded', async () => {
   data.forEach((character) => {
     // create the column
     const col = document.createElement('div');
-    col.classList.add('col');
-    col.classList.add('col-md-3');
-    col.classList.add('w-10');
-    col.classList.add('mb-4');
+    col.setAttribute('class', 'col w-10 mb-4');
 
     // create the card
     const card = document.createElement('div');
     card.classList.add('card');
+    card.style.width = '225px';
+    card.style.height = '350px';
 
     // create the card body
     const cardBody = document.createElement('div');
@@ -37,9 +36,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // create the character image element
     const characterImage = document.createElement('img');
-    characterImage.classList.add('card-img-top');
-    characterImage.alt = character.alt;
+    characterImage.setAttribute('class', 'card-img-top, my-3, mx-2');
+
+    characterImage.alt = character.fullName.concat(' character photo');
     characterImage.src = character.imageUrl;
+    characterImage.setAttribute('class', 'justify-content: center, my-3');
 
     // append the elements to the card body
     cardBody.appendChild(characterName);
