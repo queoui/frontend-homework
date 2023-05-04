@@ -10,19 +10,18 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // iterate through the array and create a card for each object
   data.forEach((character) => {
-    const col = document.createElement('col');
-    col.style.width = '17rem';
-    // col.classList.add('col mx-auto');
-    // create a Bootstrap card element
+    // create the column
+    const col = document.createElement('div');
+    col.classList.add('col');
+    col.classList.add('col-md-3');
+    col.classList.add('w-10');
+    col.classList.add('mb-4');
+
+    // create the card
     const card = document.createElement('div');
     card.classList.add('card');
-    card.classList.add('my-3');
-    card.style.textAlign = ' center';
 
-    card.style.width = '225px';
-    card.style.height = '20rem';
-
-    // create the card body element
+    // create the card body
     const cardBody = document.createElement('div');
     cardBody.classList.add('card-body');
 
@@ -40,14 +39,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     const characterImage = document.createElement('img');
     characterImage.classList.add('card-img-top');
     characterImage.alt = character.alt;
-    characterImage.height = '225';
     characterImage.src = character.imageUrl;
 
     // append the elements to the card body
     cardBody.appendChild(characterName);
     cardBody.appendChild(characterDescription);
 
-    // append the card body and image to the card
+    // append elements to the card
     card.appendChild(characterImage);
     card.appendChild(cardBody);
 
