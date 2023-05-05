@@ -26,8 +26,61 @@ const borderColors = [
   'rgba(78, 52, 199, 1)',
 ];
 
+const validHouse = [
+  'Targaryen',
+  'Tarly',
+  'Stark',
+  'Baratheon',
+  'Lannister',
+  'Greyjoy',
+  'Lanister',
+  'Clegane',
+  'Baelish',
+  'Seaworth',
+  'Tyrell',
+  'Free Folk',
+  'Tarth',
+  'Naathi',
+  'Bolton',
+  'Naharis',
+  'Lorathi',
+  'Mormont',
+  'Sparrow',
+  'Viper',
+  'Sand',
+  'Worm',
+  'Qyburn',
+  'Bronn',
+];
+const familyCount = Array(validHouse.length).fill(0);
+
 // url for the Thrones API
-const url = 'https://thronesapi.com/api/v2/Characters';
+document.addEventListener('DOMContentLoaded', async () => {
+  const url = 'https://thronesapi.com/api/v2/Characters';
+  const response = await fetch(url);
+  const data = await response.json();
+
+  const houseRegex = 'House ';
+  const regex = new RegExp(houseRegex, 'gm');
+  data.forEach((character) => {
+    let familyName = character.family;
+    if (regex.test(familyName)) {
+      familyName = familyName.replace(regex, '');
+    }
+    if (familyName === 'Lanister') {
+      familyName = 'Lannister';
+    }
+    if (familyName === 'Lorath') {
+      familyName = 'Lorathi';
+    }
+    if (familyName === 'Targaryan') {
+      familyName = 'Targaryen';
+    }
+    if (validHouse.includes(familyName)) {
+      familyCount[validHouse.findIndex((index) => index === familyName)] += 1;
+    }
+  });
+});
 
 const renderChart = () => {
   const donutChart = document.querySelector('.donut-chart');
@@ -35,11 +88,11 @@ const renderChart = () => {
   new Chart(donutChart, {
     type: 'doughnut',
     data: {
-      labels: ['label', 'label', 'label', 'label'],
+      labels: validHouse,
       datasets: [
         {
           label: 'My First Dataset',
-          data: [1, 12, 33, 5],
+          data: familyCount,
           backgroundColor: backgroundColors,
           borderColor: borderColors,
           borderWidth: 1,
