@@ -80,26 +80,26 @@ document.addEventListener('DOMContentLoaded', async () => {
       familyCount[validHouse.findIndex((index) => index === familyName)] += 1;
     }
   });
+
+  const renderChart = () => {
+    const donutChart = document.querySelector('.donut-chart');
+
+    new Chart(donutChart, {
+      type: 'doughnut',
+      data: {
+        labels: validHouse,
+        datasets: [
+          {
+            label: 'My First Dataset',
+            data: familyCount,
+            backgroundColor: backgroundColors,
+            borderColor: borderColors,
+            borderWidth: 1,
+          },
+        ],
+      },
+    });
+  };
+
+  renderChart();
 });
-
-const renderChart = () => {
-  const donutChart = document.querySelector('.donut-chart');
-
-  new Chart(donutChart, {
-    type: 'doughnut',
-    data: {
-      labels: validHouse,
-      datasets: [
-        {
-          label: 'My First Dataset',
-          data: familyCount,
-          backgroundColor: backgroundColors,
-          borderColor: borderColors,
-          borderWidth: 1,
-        },
-      ],
-    },
-  });
-};
-
-renderChart();
