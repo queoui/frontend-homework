@@ -1,4 +1,4 @@
-import { Route, Link } from 'react-router-dom';
+import { Route, Routes, Link } from 'react-router-dom';
 
 // import views
 import Search from './../views/Search';
@@ -14,21 +14,26 @@ function Navbar() {
             <Link to="/">Home</Link>
           </li>
           <li className="nav-link">
-            <Link to="/Search">Search</Link>
+            <Link to="/search">Search</Link>
           </li>
           <li className="nav-link">
-            <Link to="/Houses">Houses</Link>
+            <Link to="/houses">Houses</Link>
           </li>
         </ul>
       </nav>
+      <Routes>
+        <Route path="/" element={<Home />} />
 
-      <Route path="/">
-        <Home />
-      </Route>
-      <Route path="/search">
-        <Search title="Search for your favorite character!" />
-      </Route>
-      <Route path="/Houses"></Route>
+        <Route
+          path="/search"
+          element={<Search title="Search for your favorite character!" />}
+        />
+
+        <Route
+          path="/houses"
+          element={<Houses title="GoT House Distribution" />}
+        />
+      </Routes>
     </div>
   );
 }
