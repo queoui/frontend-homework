@@ -22,7 +22,7 @@ function Navbar() {
         </ul>
       </nav>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home title=" GoT Enthusiast!" />} />
 
         <Route
           path="/search"

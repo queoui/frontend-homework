@@ -1,8 +1,10 @@
 import { Doughnut } from 'react-chartjs-2';
+import React, { useState, useEffect } from 'react';
 import { backgroundColors, borderColors } from '../utils/chartColors.js';
 import { validHouse } from '../utils/validHouses.js';
-
-const axios = require('axios');
+import axios from 'axios';
+import { Chart, registerables } from 'chart.js';
+Chart.register(...registerables);
 
 const styles = {
   chartContainer: {
@@ -14,20 +16,28 @@ const styles = {
 };
 
 function Houses(props) {
+  const [posts, setPosts] = useState([]);
   const { title } = props;
   const familyCount = Array(validHouse.length).fill(0);
-  let data;
 
   // url for the Thrones API
   const url = 'https://thronesapi.com/api/v2/Characters';
-  axios.get(url).then(function (response) {
-    console.lot(response);
-    data = response;
+
+  useEffect(() => {
+    const fetchPost = async () => {
+      let response = await axios.get(url);
+      setPosts(response.data);
+    };
+    fetchPost();
   });
+  // const data = await axios.get(url).then(function (response) {
+  //   console.log(response.data);
+  //   return response.data;
+  // });
 
   const houseRegex = 'House ';
   const regex = new RegExp(houseRegex, 'gm');
-  data.forEach((character) => {
+  posts.forEach((character) => {
     let familyName = character.family;
     if (regex.test(familyName)) {
       familyName = familyName.replace(regex, '');
