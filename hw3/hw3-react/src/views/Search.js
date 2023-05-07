@@ -4,7 +4,9 @@ function Search(props) {
   const [post, setPost] = useState('');
   const [data, setData] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [toggle, setToggle] = useState(false);
   const { title } = props;
+
   let [name, setName] = useState('');
   let [pic, setPic] = useState('');
 
@@ -17,29 +19,21 @@ function Search(props) {
         setIsLoaded(true);
       })
       .catch((error) => console.log(error));
-  }, [data]);
+  }, []);
 
   const handleChange = (event) => {
     setPost(event.target.value);
   };
 
-  const handleClick = (nameChange, picChange) => {
-    console.log(post);
-    console.log(name);
+  const handleClick = () => {
     data.forEach((character) => {
       if (post === character.fullName) {
         console.log('match');
-        nameChange = character.fullName;
-        picChange = character.imageUrl;
+        setToggle(true);
+        setName(character.fullName);
+        setPic(character.imageUrl);
       }
     });
-    console.log(post);
-    console.log({ name });
-
-    if (post !== name) {
-      setName('');
-      setPic('');
-    }
   };
 
   return (
@@ -58,7 +52,7 @@ function Search(props) {
         <button
           type="button"
           className="btn btn-outline-primary"
-          onClick={handleClick(name, pic)}
+          onClick={handleClick}
         >
           search
         </button>
@@ -67,7 +61,7 @@ function Search(props) {
       {!isLoaded && <div>Loading...</div>}
 
       <h1>{name}</h1>
-      <img src={pic} width="225" height="225"></img>
+      {toggle && <img src={pic} width="225" height="225"></img>}
     </main>
   );
 }
