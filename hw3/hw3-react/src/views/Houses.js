@@ -30,10 +30,6 @@ function Houses(props) {
     };
     fetchPost();
   });
-  // const data = await axios.get(url).then(function (response) {
-  //   console.log(response.data);
-  //   return response.data;
-  // });
 
   const houseRegex = 'House ';
   const regex = new RegExp(houseRegex, 'gm');
@@ -60,7 +56,6 @@ function Houses(props) {
     labels: validHouse,
     datasets: [
       {
-        label: 'My First Dataset',
         data: familyCount,
         backgroundColor: backgroundColors,
         borderColor: borderColors,

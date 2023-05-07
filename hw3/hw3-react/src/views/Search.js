@@ -1,20 +1,43 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+// import { dataAPI } from '../utils/callAPI';
 
 function Search(props) {
-  const [posts, setPosts] = useState([]);
+  const [post, setPost] = useState('');
+  const [data, setData] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [toggle, setToggle] = useState(false);
   const { title } = props;
+  const [name, setName] = useState('');
+  const [pic, setPic] = useState('');
 
-  // url for the Thrones API
+  const handleChange = (event) => {
+    setPost(event.target.value);
+  };
+
+  const handleClick = () => {
+    data.forEach((character) => {
+      if (post === character.fullName) {
+        setToggle(true);
+        setName(character.fullName);
+        setPic(character.imageUrl);
+        console.log('match');
+      } else {
+        setToggle(false);
+        setName('');
+      }
+    });
+  };
+
   const url = 'https://thronesapi.com/api/v2/Characters';
-
   useEffect(() => {
-    const fetchPost = async () => {
-      let response = await axios.get(url);
-      setPosts(response.data);
-    };
-    fetchPost();
-  });
+    fetch(url)
+      .then((res) => res.json())
+      .then((characters) => {
+        setData(characters);
+        setIsLoaded(true);
+      })
+      .catch((error) => console.log(error));
+  }, [url]);
 
   return (
     <main className="container">
@@ -27,11 +50,20 @@ function Search(props) {
           placeholder="Search"
           aria-label="Search"
           aria-describedby="search-addon"
+          onChange={handleChange}
         />
-        <button type="button" class="btn btn-outline-primary">
+        <button
+          type="button"
+          className="btn btn-outline-primary"
+          onClick={handleClick}
+        >
           search
         </button>
       </div>
+
+      {!isLoaded && <div>Loading...</div>}
+      <h1>{name}</h1>
+      <img src={pic} width="225" height="225"></img>
     </main>
   );
 }
