@@ -4,6 +4,7 @@ function Search(props) {
   const [post, setPost] = useState('');
   const [data, setData] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [match, setMatch] = useState(true);
   const [toggle, setToggle] = useState(false);
   const { title } = props;
 
@@ -26,9 +27,13 @@ function Search(props) {
   };
 
   const handleClick = () => {
+    setMatch(false);
+    setToggle(false);
+    setName('');
+
     data.forEach((character) => {
       if (post === character.fullName) {
-        console.log('match');
+        setMatch(true);
         setToggle(true);
         setName(character.fullName);
         setPic(character.imageUrl);
@@ -62,6 +67,7 @@ function Search(props) {
 
       <h1>{name}</h1>
       {toggle && <img src={pic} width="225" height="225"></img>}
+      {!match && <div>Sorry, no match ...</div>}
     </main>
   );
 }
