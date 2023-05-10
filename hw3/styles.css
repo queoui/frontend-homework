@@ -1,0 +1,48 @@
+:root {
+  --black: #020202;
+  --white: #ffffff;
+  --blue: #00425c;
+  --cyan: #17a2b8;
+}
+
+body {
+  background-color: var(--cyan);
+}
+
+h1 {
+  text-align: center;
+}
+
+.donut-chart {
+  border-radius: 0.8rem;
+  background-color: var(--white);
+}
+
+img {
+  /* display: block; */
+  margin-left: auto;
+  margin-right: auto;
+  width: 200px;
+  height: 200px;
+}
+
+.row {
+  justify-content: center;
+  text-align: center;
+  width: '225px';
+  height: '20rem';
+}
+.card {
+  background-color: var(--cyan);
+  border-color: var(--cyan);
+  font-weight: bold;
+}
+
+.card:hover {
+  background-color: var(--blue);
+  color: white;
+}
+
+h5 {
+  font-weight: 700;
+}
